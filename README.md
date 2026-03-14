@@ -1,25 +1,22 @@
 # Bandit Importance Sampling
 
-
-
 ### About
 
 Bandit importance sampling (BIS) is a new class of importance sampling methods designed for settings where the target density is expensive to evaluate. 
 In contrast to adaptive importance sampling, which optimizes a proposal distribution, BIS directly designs the samples through a sequential strategy that combines space-filling designs with multi-armed bandits. 
 Our method leverages Gaussian process surrogates to guide sample selection, enabling efficient exploration of the parameter space with minimal target evaluations. 
-This repository contains source codes for the following paper:
+This repository contains source code for the following paper:
 
-> Takuo Matsubara, Andrew Duncan, Simon Cotter, Konstantinos Zygalakis. Sampling as Bandits: Evaluation-Efficient Design for Black-Box Densities. *arXiv*, 2025.
+> Matsubara, T., Duncan, A., Cotter, S., Zygalakis, K. (2026), `Sampling as Bandits: Evaluation-Efficient Design for Black-Box Densities', *arXiv*.
 
 The following three experiments were presented in the main text:
 
 1. Sampling for Benchmark Densities
 2. Bayesian Inference of Lorenz Weather Model with Synthetic Likelihood
 3. Exact Bayesian Inference of G & K Model
+4. US Precipitation Anomalies Modeled by Markov Random Fields
 
 The experimental results can be reproduced by running the iPython notebook, or the Python code, in each directory.
-
-
 
 ### Main Class
 
@@ -31,10 +28,10 @@ The first main class is "GPBanditSampler" in src.py, which performs the point se
     Parameters
     ----------
     n_init : integer
-        The number of the initial evaluations used in BIS
+        The number of initial evaluations used in BIS
         
     n_eval : integer
-        The number of the candidate pool from which a point is selected at each iteration
+        The size of the candidate pool from which a point is selected at each iteration
         
     sequence : instance
         An instance with a function "generate", which generates points to be used for the candidate pool
@@ -42,10 +39,10 @@ The first main class is "GPBanditSampler" in src.py, which performs the point se
     Main Attributes
     ----------
     find : function
-        A function to find a point that maximise a given criterion from the candidate pool
+        A function to find a point that maximizes a given criterion from the candidate pool
     """
 
-The second main class is "GP" in src.py, which is equipped with functions to initialise a GP instance, fit it to given data, and tune the hyperparameter.
+The second main class is "GP" in src.py, which is equipped with functions to initialize a GP instance, fit it to given data, and tune the hyperparameter. 
 
     class GP(BaseEstimator):
     """A Class for GP Regression
@@ -81,17 +78,17 @@ The second main class is "GP" in src.py, which is equipped with functions to ini
         A function to compute the value of the GP posterior covariance scale ( k_n(x, x) )^(1/2) at input x
     """
 
-
-
 ### Data
 
-All the data used in the experiments are available through simulation from the models specified in the paper.
+The dataset used in Section 6.4 is publicly available at https://www.image.ucar.edu/Data/precip_tapering/. Further details of the dataset can be found in the following reference.
 
+> Kaufman, C. G., Schervish, M. J. & Nychka, D. W. (2008), ‘Covariance tapering for likelihood-based estimation in large spatial data sets’, Journal of the American Statistical Association 103(484), 1545–1555.
 
+All the other datasets used in the experiments are available through simulation from the models specified in the paper.
 
 ### Dependency
 
-The source codes use Python 3.11.5 and the following packages:
+The source code uses Python 3.11.5 and the following packages:
 
 - jax (version 0.4.27)
 - tensorflow-probability (version 0.24.0)
@@ -104,10 +101,8 @@ The source codes use Python 3.11.5 and the following packages:
 - pandas (version 1.5.3)
 - tqdm (version 4.66.5)
 
-
-
 ### License
 
-The source codes is licensed under the MIT License (see LICENSE file).
+The source code is licensed under the MIT License (see LICENSE file).
 
 

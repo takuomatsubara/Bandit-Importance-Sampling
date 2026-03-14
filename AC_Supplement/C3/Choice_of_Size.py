@@ -15,7 +15,7 @@ from tensorflow_probability.substrates.jax.mcmc import sample_halton_sequence
 
 import sys
 sys.path.append("../..")
-from src import GP, GPBanditSampler, HaltonSequence, MMD, MCMC_Bounded
+from src import GP, GPBanditSampler, HaltonSequence, MMD
 
 import argparse
 
